@@ -25,17 +25,19 @@ public class App
         Calendar calendar = Calendar.getInstance();
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
+        /*
         scheduledExecutorService.scheduleAtFixedRate(
                 schedular,
                 DateUtil.millisToNextHour(calendar), 60 * 60 * 1000, TimeUnit.MILLISECONDS
         );
+        */
 
 
-        /*
+
         scheduledExecutorService.scheduleAtFixedRate(
                 schedular,
                 (long) 0, 10, TimeUnit.SECONDS
         );
-        */
+
     }
 }
