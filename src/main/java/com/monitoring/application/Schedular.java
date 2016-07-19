@@ -2,10 +2,8 @@ package com.monitoring.application;
 
 import com.monitoring.database.MetricStorer;
 
-import java.util.TimerTask;
-
 /**
- * Created by venisac on 7/17/16.
+ * Schedular that runs the task of collecting and storing performance metrics in the database at the start of every hour.
  */
 public class Schedular implements Runnable{
 

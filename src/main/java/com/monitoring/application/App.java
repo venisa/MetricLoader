@@ -10,7 +10,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Hello world!
+ * The main class of MetricLoader. This starts the schedular that collects performance metrics from the host and stores
+ * it in the database.
  *
  */
 public class App 
@@ -25,17 +26,10 @@ public class App
         Calendar calendar = Calendar.getInstance();
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
+        //Schedular to run the job to collect and store performance metrics in the database at the start of every hour
         scheduledExecutorService.scheduleAtFixedRate(
                 schedular,
                 DateUtil.millisToNextHour(calendar), 60 * 60 * 1000, TimeUnit.MILLISECONDS
         );
-
-
-        /*
-        scheduledExecutorService.scheduleAtFixedRate(
-                schedular,
-                (long) 0, 10, TimeUnit.SECONDS
-        );
-        */
     }
 }

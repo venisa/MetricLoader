@@ -9,12 +9,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by venisac on 7/17/16.
+ * Class to execute collect performance metrics from a linux box by running the appropriate linux command.
  */
 public class MetricsCollector {
 
     private static final String HOST_NAME = SystemConfig.getStringProperty("host_name");
 
+    /**
+     * Collect CPU performance information
+     *
+     * @return  CPU pojo containing information about the CPU usage of a box
+     * @throws Exception
+     */
     public static CPU getCPUStatistics() throws Exception {
 
         BufferedReader metricsReader = null;
@@ -22,16 +28,18 @@ public class MetricsCollector {
 
         try {
             Runtime runtime = Runtime.getRuntime();
+
             //Run the mpstat command on the Linux box
             Process metricsReaderProcess = runtime.exec("mpstat -P ALL");
 
             metricsReader = new BufferedReader(new InputStreamReader(metricsReaderProcess.getInputStream()));
 
+            //Ignore the first few lines containing header and other info
             metricsReader.readLine();
             metricsReader.readLine();
             metricsReader.readLine();
 
-            //Read the first line of the output of mpstat command. i.e. Read the output for CPU 'all'.
+            //Read the output for CPU 'all'.
             String allCPUMetric = metricsReader.readLine();
             if (allCPUMetric == null) {
                 throw new Exception("mpstat command did not work correctly");
@@ -75,12 +83,12 @@ public class MetricsCollector {
             Process metricsReaderProcess = runtime.exec("free -k");
 
             metricsReader = new BufferedReader(new InputStreamReader(metricsReaderProcess.getInputStream()));
-            metricsReader.readLine(); //Discard first line
+            metricsReader.readLine(); //Discard first line containing header info
 
             String memoryMetric = metricsReader.readLine();
 
             if(memoryMetric == null) {
-                throw new Exception("free -k command did not work properly");
+                throw new Exception("free -k command did not work correctly");
             }
 
             //split the command line output on whitespace
