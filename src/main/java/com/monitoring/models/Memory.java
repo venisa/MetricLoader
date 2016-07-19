@@ -3,7 +3,7 @@ package com.monitoring.models;
 import java.sql.Timestamp;
 
 /**
- * Created by venisac on 7/17/16.
+ * Pojo that maps to Memory table in the database
  */
 public class Memory {
     private final Timestamp dateTime;

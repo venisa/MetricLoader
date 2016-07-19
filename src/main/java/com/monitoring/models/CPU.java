@@ -3,7 +3,7 @@ package com.monitoring.models;
 import java.sql.Timestamp;
 
 /**
- * Created by venisac on 7/17/16.
+ * POJO that maps to CPU table in database
  */
 public class CPU {
 
@@ -14,7 +14,6 @@ public class CPU {
     private final Double per_sys;
     private final Double per_io_wait;
     private final String cpu;
-
 
     public CPU(
             Timestamp dateTime,
