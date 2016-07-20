@@ -3,8 +3,6 @@ package com.monitoring.config;
 import com.monitoring.database.Datasource;
 import com.monitoring.database.MetricStorer;
 import com.monitoring.metrics.CommandExecutor;
-import com.monitoring.metrics.LinuxCommandExecutor;
-import com.monitoring.metrics.LinuxMetricsMapper;
 import com.monitoring.metrics.MetricsManager;
 import com.monitoring.metrics.MetricsMapper;
 

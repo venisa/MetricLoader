@@ -7,7 +7,7 @@ import com.monitoring.metrics.LinuxMetricsMapper;
 import com.monitoring.metrics.MetricsMapper;
 
 /**
- * Class that binds objects to their implementation
+ * Class that binds objects to their Linux based implementation
  */
 public class LinuxBinder extends AbstractBinder {
 
