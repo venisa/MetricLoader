@@ -1,7 +1,8 @@
 package com.monitoring.application;
 
-import com.monitoring.database.Datasource;
-import com.monitoring.database.MetricStorer;
+import com.monitoring.config.AbstractBinder;
+import com.monitoring.config.LinuxBinder;
+
 import com.monitoring.util.DateUtil;
 
 import java.util.Calendar;
@@ -18,10 +19,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        Datasource datasource = new Datasource();
-        MetricStorer metricStorer = new MetricStorer(datasource);
+        //TODO use h2k dependency injection
+        AbstractBinder binder = new LinuxBinder();
 
-        Schedular schedular = new Schedular(metricStorer);
+        Schedular schedular = new Schedular(binder.getMetricManager());
 
         Calendar calendar = Calendar.getInstance();
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();

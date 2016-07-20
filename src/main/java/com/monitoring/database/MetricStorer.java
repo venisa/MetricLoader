@@ -3,7 +3,7 @@ package com.monitoring.database;
 import com.monitoring.config.SystemConfig;
 import com.monitoring.models.CPU;
 import com.monitoring.models.Memory;
-import com.monitoring.util.MetricsCollector;
+import com.monitoring.metrics.LinuxMetricsMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,42 +25,11 @@ public class MetricStorer {
     }
 
     /**
-     * Collect all the performance statistics and store it in the system
-     */
-    public void storeMetrics() {
-
-        //Collect cpu metrics
-        CPU cpu = null;
-        try {
-            cpu = MetricsCollector.getCPUStatistics();
-        } catch (Exception e) {
-            e.printStackTrace();
-            //TODO add logging
-        }
-
-        //store cpu Metrics
-        storeCPUMetrics(cpu);
-
-        //collect memory metrics
-        Memory memory = null;
-        try {
-            memory = MetricsCollector.getMemoryStatistics();
-        } catch (Exception e) {
-            e.printStackTrace();
-            //TODO add logging
-        }
-
-        //store memory metrics
-        storeMemoryMetrics(memory);
-
-    }
-
-    /**
      * Store the CPU metric information from the cpu POJO to database.
      *
      * @param cpu  The cpu object containing cpu performance info.
      */
-    protected void storeCPUMetrics(CPU cpu) {
+    public void storeCPUMetrics(CPU cpu) {
         String insertQuery = "INSERT INTO " + DATABASE + "." + CPU_TABLE + " (dateTime, host_name, per_usr, per_nice, " +
                 "per_sys, per_io_wait, cpu) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -89,7 +58,7 @@ public class MetricStorer {
      * Store the Memory metric information from the Memory POJO into database
      * @param memory
      */
-    protected void storeMemoryMetrics(Memory memory) {
+    public void storeMemoryMetrics(Memory memory) {
         String insertQuery = "INSERT INTO " + DATABASE + "." + MEMORY_TABLE + " (dateTime, total, used, free, host_name) " +
                 "VALUES (?, ?, ?, ?, ?);";
 
